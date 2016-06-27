@@ -1,23 +1,31 @@
 Prelaunchr::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
 
-  # Code is not reloaded between requests
-  config.cache_classes = true
+  config.cache_classes = false
 
-  # Full error reports are disabled and caching is turned on
-  config.consider_all_requests_local       = false
-  config.action_controller.perform_caching = true
+  # Log error messages when you accidentally call methods on nil.
+  config.whiny_nils = true
 
-  config.eager_load = true
+  config.eager_load = false
 
-  # Compress JavaScripts and CSS
-  config.assets.compress = true
+  # Show full error reports and disable caching
+  config.consider_all_requests_local       = true
+  config.action_controller.perform_caching = false
 
-  # Don't fallback to assets pipeline if a precompiled asset is missed
-  config.assets.compile = false
+  # Don't care if the mailer can't send
+  config.action_mailer.raise_delivery_errors = true
 
-  # Generate digests for assets URLs
-  config.assets.digest = true
+  # Print deprecation notices to the Rails logger
+
+  # Only use best-standards-support built into browsers
+  config.action_dispatch.best_standards_support = :builtin
+
+  # Do not compress assets
+  config.assets.compress = false
+
+  # Expands the lines which load the assets
+  config.assets.debug = true
+  config.serve_static_assets = true
 
   # Defaults to nil and saved in location specified by config.assets.prefix
   # config.assets.manifest = YOUR_PATH
@@ -56,17 +64,16 @@ Prelaunchr::Application.configure do
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation can not be found)
   config.i18n.fallbacks = true
-
+  config.log_level = :info
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
-
-  # config.action_mailer.default_url_options = { :host => ENV['DEFAULT_MAILER_HOST'] }
+  config.action_mailer.default_url_options = ENV['DEFAULT_MAILER_HOST']
 
   config.action_mailer.delivery_method = :smtp
-    ActionMailer::Base.smtp_settings = {
+  ActionMailer::Base.smtp_settings = {
     :address              => "smtp.gmail.com",
     :port                 => 587,
-    :domain               => "mail.google.com",
+    :domain               => "email-campaign-testing.herokuapp.com",
     :user_name            => ENV['GMAIL_ADDRESS'],
     :password             => ENV['GMAIL_PASSWORD'],
     :authentication       => "plain",
